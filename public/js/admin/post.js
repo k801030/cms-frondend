@@ -1,11 +1,33 @@
 angular.module('post', [])
 
+.directive("contenteditable", function() {
+  return {
+    restrict: "A",
+    require: "ngModel",
+    link: function(scope, element, attrs, ngModel) {
 
+      function read() {
+        ngModel.$setViewValue(element.html());
+      }
 
-.controller('APIController', ['$scope', '$http', function($scope, $http){
-  $scope.add;
+      ngModel.$render = function() {
+        element.html(ngModel.$viewValue || "");
+      };
+
+      element.bind("blur keyup change", function() {
+        scope.$apply(read);
+      });
+    }
+  };
+})
+
+.controller('APIController', ['$scope', '$http', '$sce', function($scope, $http, $sce){
+  $scope.add = {
+    title: "",
+    content: ""
+  };
   $scope.posts;
-
+  $scope.link;
   $scope.add_post = function() {
     console.log($scope.add);
     $http.post('http://localhost:9090/api/post', $scope.add).
@@ -18,7 +40,16 @@ angular.module('post', [])
       error(function(data, status, headers, config) {
         console.log(status);
       });
+  }
 
+  $scope.link_append = function() {
+    html = '<a href="' + $scope.link.url + '">' + $scope.link.text + '</a>';
+    $scope.add.content += html;
+  }
+
+  $scope.link_clear = function() {
+    $scope.link.text = "";
+    $scope.link.url = "";
   }
   
   $scope.get_post = function(post_id) {
@@ -61,6 +92,10 @@ angular.module('post', [])
       error(function(data, status, headers, config) {
 
       });
+  }
+
+  $scope.parseToHtml = function(_html) {
+    return $sce.trustAsHtml(_html);
   }
 
   $scope.get_all_post();
