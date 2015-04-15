@@ -45,6 +45,7 @@ angular.module('post', [])
   $scope.link_append = function() {
     html = '<a href="' + $scope.link.url + '">' + $scope.link.text + '</a>';
     $scope.add.content += html;
+    $scope.link_clear();
   }
 
   $scope.link_clear = function() {
@@ -95,6 +96,7 @@ angular.module('post', [])
   }
 
   $scope.parseToHtml = function(_html) {
+    _html = _html.replace('\n','<br>');
     return $sce.trustAsHtml(_html);
   }
 
