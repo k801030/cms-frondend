@@ -3,16 +3,22 @@ angular.module('post', [])
 
 
 .controller('APIController', ['$scope', '$http', function($scope, $http){
+  $scope.add;
   $scope.posts;
 
   $scope.add_post = function() {
-    $http.post('http://localhost:9090/api/post').
+    console.log($scope.add);
+    $http.post('http://localhost:9090/api/post', $scope.add).
       success(function(data, status, headers, config) {
         console.log('success');
+        // reload data
+        $scope.get_all_post();
+        $scope.add = {};
       }).
       error(function(data, status, headers, config) {
         console.log(status);
       });
+
   }
   
   $scope.get_post = function(post_id) {
@@ -50,7 +56,7 @@ angular.module('post', [])
   $scope.delete_post = function(post_id) {
     $http.delete('http://localhost:9090/api/post/'+post_id).
       success(function(data, status, headers, config) {
-
+        $scope.get_all_post();
       }).
       error(function(data, status, headers, config) {
 
