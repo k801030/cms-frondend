@@ -5,7 +5,8 @@
     <title><%- title %></title>
     <%- include ../partial/header.ejs %>   
     <!-- include angular js file -->
-    <script src="/js/admin/post.js"></script>s
+    <script src="/js/admin/post.js"></script>
+    <script src="/js/api.js"></script>
 </head>
 
 
@@ -103,7 +104,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="odd gradeX" ng-repeat="post in posts">
+                    <tr class="odd gradeX" ng-repeat="post in posts.posts">
                       <td>{{ post._id }}</td>
                       <td>{{ post.title }}</td>
                       <td ng-bind-html="parseToHtml(post.content)"></td>
