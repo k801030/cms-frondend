@@ -10,7 +10,7 @@
 </head>
 
 
-<body ng-app="post" ng-controller="APIController">
+<body ng-app="adminPost" ng-controller="APIController">
 
   <div id="wrapper">
 
@@ -104,7 +104,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="odd gradeX" ng-repeat="post in posts.posts">
+                    <tr class="odd gradeX" ng-repeat="post in data.posts">
                       <td>{{ post._id }}</td>
                       <td>{{ post.title }}</td>
                       <td ng-bind-html="parseToHtml(post.content)"></td>

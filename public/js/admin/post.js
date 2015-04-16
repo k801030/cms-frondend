@@ -1,4 +1,4 @@
-angular.module('post', ['api'])
+angular.module('adminPost', ['api'])
 
 
 
@@ -7,7 +7,7 @@ angular.module('post', ['api'])
     title: "",
     content: ""
   };
-  $scope.posts = postApi.data;
+  $scope.data = postApi.data;
   $scope.link;
   
   $scope.add_post = function(){
@@ -35,8 +35,9 @@ angular.module('post', ['api'])
   }
 
   $scope.link_append = function() {
-    html = '<a href="' + $scope.link.url + '">' + $scope.link.text + '</a>';
+    html = '<a href="' + $scope.link.url + '" blank="target">' + $scope.link.text + '</a>';
     $scope.add.content += html;
+    console.log(html);
     $scope.link_clear();
   }
 

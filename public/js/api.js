@@ -26,7 +26,7 @@ angular.module('api', [])
 .service('postApi', ['$http', '$sce', 'serverUrl', function($http, $sce, serverUrl) {
   var _data = {};
   _data.posts = [];
-
+  _data.singlePost = {};
   this.data = _data;
   this.add_post = function(add_data, callback) {
     $http.post(serverUrl + '/api/post', add_data).
@@ -44,7 +44,7 @@ angular.module('api', [])
   this.get_post = function(post_id) {
     $http.get(serverUrl + '/api/post/'+post_id).
       success(function(data, status, headers, config) {
-        return data;
+        _data.singlePost = data;
       }).
       error(function(data, status, headers, config) {
 
