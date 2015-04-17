@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var less = require('less');
+var fs = require('fs');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -27,6 +29,21 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
 
+// LESS
+
+var lessPath = './public/styles';
+var distPath = './public/dist/css/style.css'
+fs.readFile(lessPath + '/style.less', function(error, data) {
+  var dataString = data.toString();
+  
+  less.render(dataString,{
+    paths: [lessPath],
+    compress: true 
+  }, function (e, output) {
+    console.log("less render completed");
+    fs.writeFile(distPath, output.css);
+  });
+});
 
 
 
