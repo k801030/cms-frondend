@@ -17,3 +17,9 @@
 .sidebar ul li a.active {
     background-color: #efefef;
 }
+
+
+/* All to right */
+.right {
+    float: right;
+}
