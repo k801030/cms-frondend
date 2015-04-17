@@ -104,11 +104,11 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="odd gradeX" ng-repeat="post in data.posts">
+                    <tr class="odd gradeX" ng-repeat="post in data.posts | orderBy:'date'">
                       <td>{{ post._id }}</td>
                       <td>{{ post.title }}</td>
                       <td ng-bind-html="parseToHtml(post.content)"></td>
-                      <td class="center">{{ post.date }}</td>
+                      <td class="center">{{ post.date | date:'yyyy-MM-dd' }}</td>
                       <td><a href="" ng-click="delete_post(post._id)">Delete</a></td>
                     </tr>
                   </tbody>

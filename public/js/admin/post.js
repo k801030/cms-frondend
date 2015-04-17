@@ -5,7 +5,8 @@ angular.module('adminPost', ['api'])
 .controller('APIController', ['$scope', '$http', '$sce', 'postApi', function($scope, $http, $sce, postApi){
   $scope.add = {
     title: "",
-    content: ""
+    content: "",
+    date: new Date()
   };
   $scope.data = postApi.data;
   $scope.link;

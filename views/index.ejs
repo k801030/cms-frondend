@@ -46,8 +46,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="odd gradeX" ng-repeat="post in data.posts">
-                      <td class="center">{{ post.date }}</td>
+                    <tr class="odd gradeX" ng-repeat="post in data.posts | orderBy:'date'">
+                      <td class="center">{{ post.date | date:'yyyy-MM-dd' }}</td>
                       <td><a ng-href="/post/{{post._id}}">{{ post.title }}</a></td>
                       
                     </tr>
